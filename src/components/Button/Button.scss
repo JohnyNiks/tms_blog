@@ -1,0 +1,20 @@
+@import "../../styles/variables";
+.button {
+  font-family: InterSemiBold, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 16px 32px;
+  border-radius: 2px;
+  background: $color-primary;
+  color: $color-white;
+
+  &:hover {
+    background: $color-primary2;
+  }
+
+  &--primary {
+    background: $color-primary;
+    color: $color-white;
+  }
+
+}
