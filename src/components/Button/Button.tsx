@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import './Button.scss'
 
 type ButtonProps = {
-  text: string
+  text?: string
   disabled?: boolean
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
   className?: string
+  icon?: ReactElement
+  alt?: string
 }
 
 export const Button = ({
@@ -13,6 +15,7 @@ export const Button = ({
   disabled = false,
   onClick,
   className = 'primary',
+  icon,
 }: ButtonProps) => {
   return (
     <button
@@ -21,7 +24,8 @@ export const Button = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {text}
+      {icon}
+      {text && <span className="button__text">{text}</span>}
     </button>
   )
 }
