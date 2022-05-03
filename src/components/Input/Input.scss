@@ -1,0 +1,40 @@
+@import "../../styles/variables";
+
+.input {
+  max-width: 544px;
+  font-family: InterRegular, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    color: $color-secondary;
+  }
+
+  &__input {
+    padding: 18px 20px;
+    background-color: $color-white;
+    color: $color-background-primary;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  &__label ~ &__input {
+    margin-top: 8px;
+  }
+
+  &__input ~ &__error {
+    margin-top: 16px;
+  }
+
+  &__error {
+    display: block;
+    color: $color-error;
+  }
+
+  &:focus {
+    // continue css styyles
+  }
+}
