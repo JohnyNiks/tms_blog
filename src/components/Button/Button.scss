@@ -7,14 +7,75 @@
   border-radius: 2px;
   background: $color-primary;
   color: $color-white;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &:hover {
-    background: $color-primary2;
+  &:disabled, &:hover:disabled {
+    color: $color-background-primary;
+    background-color: $color-light;
+    cursor: not-allowed;
   }
 
   &--primary {
     background: $color-primary;
-    color: $color-white;
   }
 
+  &--primary:hover {
+    background: $color-primary2;
+  }
+
+  &--secondary {
+    color: $color-secondary;
+    background: $color-background-secondary;
+  }
+
+  &--secondary:hover {
+    background: $color-background-primary2;
+  }
+
+  &--secondary2 {
+    color: $color-error;
+    background: transparent;
+  }
+
+  &--secondary2:hover {
+    border: 1px solid $color-background-primary2;
+  }
+
+  &--with-icon {
+    color: $color-secondary;
+    background: $color-light;
+  }
+
+  &--with-icon:hover {
+    color: $color-white;
+    background-color: $color-primary2;
+  }
+
+  &--with-icon2 {
+    color: $color-secondary;
+    background: $color-light;
+  }
+
+  &--with-icon2:hover {
+    color: $color-white;
+    background-color: $color-error;
+  }
+
+
+  svg ~ &__text {
+    margin-left: 14px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+   svg path {
+    fill: $color-white;
+  }
 }
+
