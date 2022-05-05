@@ -51,6 +51,7 @@ function App() {
         placeholder="Placeholder"
         error={true}
         errorMessage="Error text"
+        disabled
       />
       <Input type="password" title="Title" placeholder="Placeholder" />
     </div>
