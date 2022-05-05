@@ -27,7 +27,7 @@ export const Input = ({
       )}
       <input
         id={type}
-        className="input__input"
+        className={`input__input ${error ? 'input__input--error' : null}`}
         type={type ?? 'text'}
         placeholder={placeholder}
         disabled={disabled}

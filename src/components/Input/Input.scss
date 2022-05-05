@@ -32,6 +32,9 @@
     background-color: $color-light;
   }
 
+  &__input--error, &__input--error:focus {
+    outline-color: $color-error;
+  }
   &__label ~ &__input {
     margin-top: 8px;
   }
