@@ -7,7 +7,7 @@ function App() {
       <nav>
         <Link to="/posts">Posts</Link>
         <Link to="/posts/1">Post 1</Link>
-        <Link to="/posts/add">Post 1</Link>
+        <Link to="/posts/add">Add Post</Link>
         <Link to="/search">Search</Link>
       </nav>
     </div>
