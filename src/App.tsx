@@ -1,48 +1,15 @@
 import React from 'react'
-import { Button } from './components/Button'
-import { ReactComponent as BookmarkIcon } from './assets/images/bookmark.svg'
-import { ReactComponent as LikeIcon } from './assets/images/like.svg'
-import { ReactComponent as DislikeIcon } from './assets/images/dislike.svg'
+import { Link } from 'react-router-dom'
 
 function App() {
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.target)
-  }
-
   return (
     <div className="App">
-      <Button
-        text="Primary"
-        disabled
-        className="primary"
-        onClick={handleButtonClick}
-      />
-      <Button
-        text="Secondary"
-        className="secondary"
-        onClick={handleButtonClick}
-      />
-      <Button
-        text="Secondary2"
-        className="secondary2"
-        onClick={handleButtonClick}
-      />
-      <Button
-        text="Button with icon"
-        className="with-icon"
-        icon={<BookmarkIcon />}
-        onClick={handleButtonClick}
-      />
-      <Button
-        icon={<DislikeIcon />}
-        className="with-icon2"
-        onClick={handleButtonClick}
-      />
-      <Button
-        icon={<LikeIcon />}
-        className="with-icon"
-        onClick={handleButtonClick}
-      />
+      <nav>
+        <Link to="/posts">Posts</Link>
+        <Link to="/posts/1">Post 1</Link>
+        <Link to="/posts/add">Post 1</Link>
+        <Link to="/search">Search</Link>
+      </nav>
     </div>
   )
 }
