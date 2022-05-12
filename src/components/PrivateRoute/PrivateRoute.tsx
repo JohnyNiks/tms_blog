@@ -1,20 +1,12 @@
-import { Route, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import React from 'react'
+import { useAuth } from '../../hooks'
 
-type PrivateRouteProps = {
-  children: React.ReactChild
-  isAuthenticated: boolean
+interface PrivateRouteProps {
+  children: JSX.Element
 }
 
-export const PrivateRoute = ({
-  children,
-  isAuthenticated,
-  ...rest
-}: PrivateRouteProps) => {
-  return (
-    <Route
-      {...rest}
-      element={isAuthenticated ? children : <Navigate to="/sign-in" />}
-    />
-  )
+export const PrivateRoute = ({ children }: PrivateRouteProps) => {
+  const isAuthenticated = useAuth()
+  return isAuthenticated ? children : <Navigate to="/sign-in" />
 }
