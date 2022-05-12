@@ -18,6 +18,14 @@ root.render(
         <Route path="/posts/add" element={<AddPost />} />
         <Route path="/posts/:id" element={<Post />} />
         <Route path="/search" element={<Search />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: '1rem' }}>
+              <p>404 Not Found</p>
+            </main>
+          }
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
