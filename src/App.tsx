@@ -1,23 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from './components/Button'
 import { ReactComponent as BookmarkIcon } from './assets/images/bookmark.svg'
 import { ReactComponent as LikeIcon } from './assets/images/like.svg'
 import { ReactComponent as DislikeIcon } from './assets/images/dislike.svg'
+import { setTheme } from './redux/reducers/theme'
+import { useAppDispatch, useAppSelector } from './redux/hooks'
 
 function App() {
-  const [theme, setTheme] = useState('dark')
+  const theme = useAppSelector(state => state.theme.value)
+  const dispatch = useAppDispatch()
+
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(event.target)
   }
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
+    dispatch(setTheme(newTheme))
   }
 
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
+      {theme}
       <Button
         text="Secondary"
         className="secondary"
