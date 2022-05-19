@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { fetchPosts } from './postsSlice'
+import { fetchPosts, likePost, dislikePost } from './postsSlice'
 
 import { postsData } from '../../redux/postsData'
 
@@ -15,7 +15,16 @@ export const usePosts = () => {
     }, 1000)
   }, [])
 
+  const onLikePost = (id: number) => {
+    dispatch(likePost(id))
+  }
+  const onDislikePost = (id: number) => {
+    dispatch(dislikePost(id))
+  }
+
   return {
     posts,
+    onLikePost,
+    onDislikePost,
   }
 }
