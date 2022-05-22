@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from './components/Button'
+import { Input } from './components/Input'
 import { ReactComponent as BookmarkIcon } from './assets/images/bookmark.svg'
 import { ReactComponent as LikeIcon } from './assets/images/like.svg'
 import { ReactComponent as DislikeIcon } from './assets/images/dislike.svg'
@@ -49,6 +50,16 @@ function App() {
         className="with-icon"
         onClick={handleButtonClick}
       />
+      <Input title="Title" placeholder="Placeholder" />
+      <Input
+        type="email"
+        title="Title"
+        placeholder="Placeholder"
+        error={true}
+        errorMessage="Error text"
+        disabled
+      />
+      <Input type="password" title="Title" placeholder="Placeholder" />
     </div>
   )
 }
