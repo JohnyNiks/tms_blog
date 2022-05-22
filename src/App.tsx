@@ -1,65 +1,39 @@
 import React from 'react'
 import { Button } from './components/Button'
-import { Input } from './components/Input'
-import { ReactComponent as BookmarkIcon } from './assets/images/bookmark.svg'
+
+import { useTheme } from './features/theme'
+
+import { usePosts } from './features/posts/usePosts'
 import { ReactComponent as LikeIcon } from './assets/images/like.svg'
 import { ReactComponent as DislikeIcon } from './assets/images/dislike.svg'
-import { setTheme } from './redux/reducers/theme'
-import { useAppDispatch, useAppSelector } from './redux/hooks'
 
 function App() {
-  const theme = useAppSelector(state => state.theme.value)
-  const dispatch = useAppDispatch()
-
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event.target)
-  }
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    dispatch(setTheme(newTheme))
-  }
+  const { theme, toggleTheme } = useTheme()
+  const { posts, onLikePost, onDislikePost } = usePosts()
 
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
-      {theme}
-      <Button
-        text="Secondary"
-        className="secondary"
-        onClick={handleButtonClick}
-      />
-      <Button
-        text="Secondary2"
-        className="secondary2"
-        onClick={handleButtonClick}
-      />
-      <Button
-        text="Button with icon"
-        className="with-icon"
-        icon={<BookmarkIcon />}
-        onClick={handleButtonClick}
-      />
-      <Button
-        icon={<DislikeIcon />}
-        className="with-icon2"
-        onClick={handleButtonClick}
-      />
-      <Button
-        icon={<LikeIcon />}
-        className="with-icon"
-        onClick={handleButtonClick}
-      />
-      <Input title="Title" placeholder="Placeholder" />
-      <Input
-        type="email"
-        title="Title"
-        placeholder="Placeholder"
-        error={true}
-        errorMessage="Error text"
-        disabled
-      />
-      <Input type="password" title="Title" placeholder="Placeholder" />
+      {posts?.map(post => {
+        return (
+          <div key={post.id}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span>{post.title}</span>
+              <span>{String(post.like)}</span>
+            </div>
+            <Button
+              className="secondary"
+              onClick={() => onLikePost(post.id)}
+              icon={<LikeIcon />}
+            />
+            <Button
+              className="secondary"
+              onClick={() => onDislikePost(post.id)}
+              icon={<DislikeIcon />}
+            />
+          </div>
+        )
+      })}
     </div>
   )
 }
