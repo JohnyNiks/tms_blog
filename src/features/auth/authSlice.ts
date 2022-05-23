@@ -2,13 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type AuthState = {
   user: User | null
+  loading: string
 }
 
 type User = {
   name: string
 }
 
-type SignUpPayload = {
+export type SignUpPayload = {
   name: string
   email: string
   password: string
@@ -16,14 +17,23 @@ type SignUpPayload = {
 
 const initialState: AuthState = {
   user: null,
+  loading: 'idle',
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    signUpLoading: state => {
+      if (state.loading === 'idle') {
+        state.loading = 'pending'
+      }
+    },
     signUp: (state, action: PayloadAction<SignUpPayload>) => {
-      state.user = action.payload
+      if (state.loading === 'pending') {
+        state.loading = 'idle'
+        state.user = action.payload
+      }
     },
   },
 })
