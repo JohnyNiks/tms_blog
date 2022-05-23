@@ -22,15 +22,16 @@ export const Input = ({
   errorMessage,
   value,
 }: InputProps) => {
+  const id = String(Math.random() * 10)
   return (
     <div className="input">
       {title && (
-        <label className="input__label" htmlFor={type}>
+        <label className="input__label" htmlFor={id}>
           {title}
         </label>
       )}
       <input
-        id={type}
+        id={id}
         className={`input__input ${error ? 'input__input--error' : null}`}
         type={type ?? 'text'}
         value={value}
