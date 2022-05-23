@@ -4,6 +4,9 @@ import { Input } from './components/Input'
 
 import { useTheme } from './features/theme'
 
+import { useAppDispatch } from './redux/hooks'
+import { signUp } from './features/auth'
+
 function App() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -30,6 +33,18 @@ function App() {
     setConfirmedPassword(event.target.value)
   }
 
+  const dispatch = useAppDispatch()
+
+  const submitForm = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+    const formData = {
+      name,
+      email,
+      password,
+    }
+    dispatch(signUp(formData))
+  }
+
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
@@ -48,6 +63,7 @@ function App() {
           value={confirmedPassword}
           onChange={onConfirmedPasswordChange}
         />
+        <Button text="Sign Up" className="primary" onClick={submitForm} />
       </form>
     </div>
   )
