@@ -42,7 +42,7 @@ function App() {
       email,
       password,
     }
-    dispatch(signUp(formData))
+    dispatch(signUp())
   }
 
   return (

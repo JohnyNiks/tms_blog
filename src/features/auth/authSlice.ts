@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type AuthState = {
   user: User | null
-  loading: string
+  isLoading: string
+  error: string | null
 }
 
 type User = {
@@ -17,28 +18,33 @@ export type SignUpPayload = {
 
 const initialState: AuthState = {
   user: null,
-  loading: 'idle',
+  isLoading: 'idle',
+  error: null,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signUpLoading: state => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending'
+    signUp: state => {
+      if (state.isLoading === 'idle') {
+        state.isLoading = 'pending'
       }
     },
-    signUp: (state, action: PayloadAction<SignUpPayload>) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle'
+    signUpSuccess: (state, action: PayloadAction<SignUpPayload>) => {
+      if (state.isLoading === 'pending') {
+        state.isLoading = 'idle'
         state.user = action.payload
       }
+    },
+    signUpFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = 'idle'
+      state.error = action.payload
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { signUp } = authSlice.actions
+export const { signUpSuccess, signUp, signUpFailure } = authSlice.actions
 
 export default authSlice.reducer
