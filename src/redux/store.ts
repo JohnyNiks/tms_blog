@@ -5,6 +5,8 @@ import { themeReducer } from '../features/theme'
 import { postsReducer } from '../features/posts'
 import { authReducer } from '../features/auth'
 import { signUpSaga } from '../sagas/signUpSagas'
+import { postSaga } from '../sagas/postSagas'
+
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
@@ -19,6 +21,7 @@ export const store = configureStore({
 })
 
 sagaMiddleware.run(signUpSaga)
+sagaMiddleware.run(postSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 
