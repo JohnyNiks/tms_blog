@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type Post = {
+export type Post = {
   id: number
   image: string
   text: string
@@ -13,10 +13,16 @@ type Post = {
 
 interface PostsState {
   content: Array<Post> | null
+  post: Post | null
+  isLoading: 'idle' | 'pending'
+  error: string | null
 }
 
 const initialState: PostsState = {
   content: null,
+  post: null,
+  isLoading: 'idle',
+  error: null,
 }
 
 export const postsSlice = createSlice({
@@ -40,10 +46,32 @@ export const postsSlice = createSlice({
         )
       }
     },
+    getPost: (state, action: PayloadAction<number>) => {
+      if (state.isLoading === 'idle') {
+        state.isLoading = 'pending'
+      }
+    },
+    getPostSuccess: (state, action: PayloadAction<Post>) => {
+      if (state.isLoading === 'pending') {
+        state.isLoading = 'idle'
+        state.post = action.payload
+      }
+    },
+    getPostFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = 'idle'
+      state.error = action.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { fetchPosts, likePost, dislikePost } = postsSlice.actions
+export const {
+  fetchPosts,
+  likePost,
+  dislikePost,
+  getPost,
+  getPostSuccess,
+  getPostFailure,
+} = postsSlice.actions
 
 export default postsSlice.reducer
