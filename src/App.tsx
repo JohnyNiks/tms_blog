@@ -4,19 +4,19 @@ import { Input } from './components/Input'
 
 import { useTheme } from './features/theme'
 
-import { useAppDispatch } from './redux/hooks'
+import { useAppDispatch, useAppSelector } from './redux/hooks'
 import { signUp } from './features/auth'
 
 function App() {
-  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmedPassword, setConfirmedPassword] = useState('')
-
+  const error = useAppSelector(state => state.auth.error)
   const { theme, toggleTheme } = useTheme()
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value)
+    setUsername(event.target.value)
   }
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,24 +38,38 @@ function App() {
   const submitForm = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     const formData = {
-      name,
+      username,
       email,
       password,
     }
-    dispatch(signUp())
+    dispatch(signUp(formData))
   }
 
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
       <form>
-        <Input title="Name" value={name} onChange={onNameChange} />
-        <Input title="Email" value={email} onChange={onEmailChange} />
+        <Input
+          title="Name"
+          value={username}
+          onChange={onNameChange}
+          error={Boolean(error?.username[0])}
+          errorMessage={error?.username[0]}
+        />
+        <Input
+          title="Email"
+          value={email}
+          onChange={onEmailChange}
+          error={Boolean(error?.email[0])}
+          errorMessage={error?.email[0]}
+        />
         <Input
           type="password"
           title="Password"
           value={password}
           onChange={onPasswordChange}
+          error={Boolean(error?.password[0])}
+          errorMessage={error?.password[0]}
         />
         <Input
           type="password"
