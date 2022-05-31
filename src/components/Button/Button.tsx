@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ButtonHTMLAttributes, ReactElement } from 'react'
 import './Button.scss'
 
 type ButtonProps = {
@@ -16,13 +16,14 @@ export const Button = ({
   onClick,
   className = 'primary',
   icon,
-}: ButtonProps) => {
+  ...rest
+}: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      type="button"
       className={`button button--${className}`}
       disabled={disabled}
       onClick={onClick}
+      {...rest}
     >
       {icon}
       {text && <span className="button__text">{text}</span>}

@@ -20,3 +20,13 @@ code {
 nav a {
   padding: 1rem;
 }
+
+.theme {
+  &--light {
+    background-color: #DADADA;
+  }
+
+  &--dark {
+    background-color: #313037;
+  }
+}
