@@ -6,6 +6,7 @@ import { useTheme } from './features/theme'
 
 import { useAppDispatch, useAppSelector } from './redux/hooks'
 import { signUp } from './features/auth'
+import { signIn } from './features/signIn'
 
 function App() {
   const [username, setUsername] = useState('')
@@ -45,9 +46,39 @@ function App() {
     dispatch(signUp(formData))
   }
 
+  const submitSignInForm = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void => {
+    event.preventDefault()
+    const formData = {
+      email,
+      password,
+    }
+    dispatch(signIn(formData))
+  }
+
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
+      <form>
+        <Input
+          title="Email"
+          value={email}
+          onChange={onEmailChange}
+          error={Boolean(error?.email[0])}
+          errorMessage={error?.email[0]}
+        />
+        <Input
+          type="password"
+          title="Password"
+          value={password}
+          onChange={onPasswordChange}
+          error={Boolean(error?.password[0])}
+          errorMessage={error?.password[0]}
+        />
+        <Button text="Sign In" className="primary" onClick={submitSignInForm} />
+      </form>
+      <hr />
       <form>
         <Input
           title="Name"

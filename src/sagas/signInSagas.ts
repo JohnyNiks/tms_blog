@@ -36,6 +36,7 @@ const signUpRequest = async (
 export function* signIn(action: PayloadAction<SignInPayload>) {
   try {
     const data: SignInSuccessPayload = yield call(signUpRequest, action.payload)
+    localStorage.setItem('authTokens', JSON.stringify(data))
     yield put(signInSuccess(data))
   } catch (error: any) {
     yield put(signInFailure(error))
