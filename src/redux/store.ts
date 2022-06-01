@@ -6,7 +6,7 @@ import { postsReducer } from '../features/posts'
 import { authReducer } from '../features/auth'
 import { signInReducer } from '../features/signIn'
 
-import { signUpSaga } from '../sagas/signUpSagas'
+import { signUpSaga, signInSaga } from '../sagas'
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
@@ -22,6 +22,7 @@ export const store = configureStore({
 })
 
 sagaMiddleware.run(signUpSaga)
+sagaMiddleware.run(signInSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 
