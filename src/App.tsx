@@ -7,6 +7,7 @@ import { useTheme } from './features/theme'
 import { useAppDispatch, useAppSelector } from './redux/hooks'
 import { signUp } from './features/auth'
 import { signIn } from './features/signIn'
+import { customFetch } from './utils/customFetch'
 
 function App() {
   const [username, setUsername] = useState('')
@@ -57,9 +58,17 @@ function App() {
     dispatch(signIn(formData))
   }
 
+  const getUserInfo = async () => {
+    const data = await customFetch(
+      'https://studapi.teachmeskills.by/auth/users'
+    )
+    console.log(data)
+  }
+
   return (
     <div className={`App theme--${theme}`}>
       <Button text="Primary" className="primary" onClick={toggleTheme} />
+      <Button text="getUserInfo" className="primary" onClick={getUserInfo} />
       <form>
         <Input
           title="Email"

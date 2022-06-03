@@ -8,7 +8,7 @@ import {
   signInSuccess,
 } from '../features/signIn'
 
-const signUpRequest = async (
+const signInRequest = async (
   payload: SignInPayload
 ): Promise<SignInSuccessPayload> => {
   const headers = {
@@ -30,13 +30,15 @@ const signUpRequest = async (
     return Promise.reject(data as SignInError)
   }
 
+  localStorage.setItem('access', JSON.stringify(data.access))
+  localStorage.setItem('refresh', JSON.stringify(data.refresh))
+
   return data as SignInSuccessPayload
 }
 
 export function* signIn(action: PayloadAction<SignInPayload>) {
   try {
-    const data: SignInSuccessPayload = yield call(signUpRequest, action.payload)
-    localStorage.setItem('authTokens', JSON.stringify(data))
+    const data: SignInSuccessPayload = yield call(signInRequest, action.payload)
     yield put(signInSuccess(data))
   } catch (error: any) {
     yield put(signInFailure(error))
