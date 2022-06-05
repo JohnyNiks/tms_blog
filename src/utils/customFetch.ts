@@ -39,7 +39,7 @@ export const customFetch = async (url: string, config: any = {}) => {
       const isAccessExpired = expirationMillisTime
         ? expirationMillisTime - Date.now() < 0
         : false
-      console.log(isAccessExpired, expirationMillisTime - Date.now())
+
       if (isAccessExpired) {
         try {
           const refresh = localStorage.getItem('refresh')
