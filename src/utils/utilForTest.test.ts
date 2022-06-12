@@ -20,11 +20,20 @@ export const subjects = {
 }
 
 describe('util getAverageStudentsCount', () => {
-  it('should return value 120 as average students count', () => {
+  it('should return value 120 as average students count for mock ', () => {
     expect(getAverageStudentsCount(subjects)).toBe(120)
   })
 
   it('should return value 0 as average students count for empty object of subjects', () => {
-    expect(getAverageStudentsCount({})).toBe(0)
+    expect(getAverageStudentsCount({})).toBeNull()
+  })
+
+  it('should return value 0 as average students count for no-object arguments', () => {
+    expect(getAverageStudentsCount(null)).toBeNull()
+    expect(getAverageStudentsCount(undefined)).toBeNull()
+    expect(getAverageStudentsCount([])).toBeNull()
+    expect(getAverageStudentsCount(0)).toBeNull()
+    expect(getAverageStudentsCount(1)).toBeNull()
+    expect(getAverageStudentsCount('0')).toBeNull()
   })
 })
