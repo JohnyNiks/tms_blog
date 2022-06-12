@@ -19,6 +19,12 @@ export const subjects = {
   },
 }
 
-it('average students count should be 120', () => {
-  expect(getAverageStudentsCount(subjects)).toBe(120)
+describe('util getAverageStudentsCount', () => {
+  it('should return value 120 as average students count', () => {
+    expect(getAverageStudentsCount(subjects)).toBe(120)
+  })
+
+  it('should return value 0 as average students count for empty object of subjects', () => {
+    expect(getAverageStudentsCount({})).toBe(0)
+  })
 })
